@@ -28,7 +28,7 @@ Burden_WXS_female_singleton <- assocTest(test_GT[,test_GT$sex==2], test = "firth
 Burden_WXS_male_singleton <- assocTest(test_GT[,test_GT$sex==1], test = "firth", covar = c("sex", paste0("PC", 1:10)), pheno = "MND", maxCarriers = 1)
 
 # Performing Domain specific burden test
-  ## selecting all moderate variants with their AM score (in total 92 variants)
+  ## selecting all moderate variants with their AM score 
 am <- getAnno(gdb, table = "geneVarClass_AM_ESM1b_exQCpass_ALS_WXS") ##all variants with their AM score
 am_moderate <- am[am[, "moderate"] ==1,] 
 
@@ -39,7 +39,7 @@ AM_moderate_2 <- am_moderate %>% left_join(AlphaMissense %>% select(VAR_id, prot
   ## based on the amino acid location for each mutation was determined in which domain it was located (6 variants in the motor-, 61 variants in the stalk-, and 25 variants in the tail-domain)
 dom <- c(rep("motor", 6), rep("stalk", 61), rep("tail", 25)) 
 AM_moderate_2$domain <- dom ##add a domain column
-AM_moderate_3 <- AM_moderate_2[-c(1,28,44,52),] ## remove the samples that are not identified in AM. Results in 88 samples (6 motor, 58 stalk, 24 tail)
+AM_moderate_3 <- AM_moderate_2[-c(1,28,44,52),] ## remove the samples that are not identified in AM. 
 
   ##creating domain-specific dataframes
 AM_moderate_tail <- AM_moderate_3[AM_moderate_3[,"domain"]=="tail",]
